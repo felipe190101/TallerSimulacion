@@ -9,7 +9,7 @@ public class Heroe : MonoBehaviour
     private Rigidbody2D rig;
     private Animator anim;
     private SpriteRenderer spritPersonaje;
-
+    [SerializeField] private int vidaPersonaje;
    
 
     public float speed = 5.0f;
@@ -31,40 +31,41 @@ public class Heroe : MonoBehaviour
 
         if(movimientoHorizontal > 0) {
             spritPersonaje.flipX = true;
+            
         }else if(movimientoHorizontal < 0) {
             spritPersonaje.flipX = false;
         }
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-
-        if (collision.gameObject.CompareTag("PuertaMina"))
-        {
+    private void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.CompareTag("PuertaMina")){
             SceneManager.LoadScene("Mina");
         }
-        if (collision.gameObject.CompareTag("salida_mina"))
-        {
+        if (collision.gameObject.CompareTag("salida_mina")){
             SceneManager.LoadScene("Nivel1"); 
         }
-        if (collision.gameObject.CompareTag("PuertaCastillo"))
-        {
+        if (collision.gameObject.CompareTag("PuertaCastillo")){
             SceneManager.LoadScene("Castillo Nieve");
         }
-        if (collision.gameObject.CompareTag("salida_castillo"))
-        {
+        if (collision.gameObject.CompareTag("salida_castillo")){
             SceneManager.LoadScene("Nivel1");
         }
-        if (collision.gameObject.CompareTag("PuertaVolcan"))
-        {
+        if (collision.gameObject.CompareTag("PuertaVolcan")){
             SceneManager.LoadScene("Volcan");
         }
-        if (collision.gameObject.CompareTag("salida_volcan"))
-        {
+        if (collision.gameObject.CompareTag("salida_volcan")){
             SceneManager.LoadScene("Nivel1");
         }
-        
+    }
+
+    public void CausarHerida () {
+        if(vidaPersonaje > 0) {
+            vidaPersonaje--;
+
+            if(vidaPersonaje == 0) {
+                //Debug.Log("Se acabaron las vidas perro");
+            }
+        }
     }
 }

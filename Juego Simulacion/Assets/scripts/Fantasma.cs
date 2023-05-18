@@ -57,7 +57,6 @@ public class Fantasma : MonoBehaviour
                 spritPersonaje.flipX = false;
             }else{
                 spritPersonaje.flipX = true;
-
             }
         }else{
             elapsedFrames++;
@@ -122,5 +121,12 @@ public class Fantasma : MonoBehaviour
         }
 
         return numeros;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.CompareTag("Player")) {
+            Debug.Log("Ataqueperros");
+            anim.SetTrigger("Ataca");
+        }
     }
 }

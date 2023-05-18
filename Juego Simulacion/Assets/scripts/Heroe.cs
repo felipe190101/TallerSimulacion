@@ -9,6 +9,7 @@ public class Heroe : MonoBehaviour
     private Rigidbody2D rig;
     private Animator anim;
     private SpriteRenderer spritPersonaje;
+    private vida sistemaVida;
     [SerializeField] private int vidaPersonaje;
    
 
@@ -18,6 +19,11 @@ public class Heroe : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         spritPersonaje = GetComponentInChildren<SpriteRenderer>();
+        sistemaVida = GetComponent<vida>();
+        sistemaVida.setVida(vidaPersonaje);
+        sistemaVida.iniciarVIda();
+
+
     }
 
     void Update()
@@ -62,6 +68,8 @@ public class Heroe : MonoBehaviour
     public void CausarHerida () {
         if(vidaPersonaje > 0) {
             vidaPersonaje--;
+            Debug.Log(vidaPersonaje);
+            sistemaVida.setVida(vidaPersonaje);
 
             if(vidaPersonaje == 0) {
                 //Debug.Log("Se acabaron las vidas perro");

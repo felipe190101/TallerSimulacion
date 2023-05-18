@@ -10,6 +10,7 @@ public class Fantasma : MonoBehaviour
     [SerializeField] private int cantidad;
     [SerializeField] private int multiplicador;
     [SerializeField] private int controlMovimiento;
+    [SerializeField] public int daño;
 
     private Animator anim;
     private Rigidbody2D rig;
@@ -51,7 +52,9 @@ public class Fantasma : MonoBehaviour
         this.transform.position = new Vector3(transform.position.x,transform.position.y,0);
         float distancia = Vector3.Distance(personaje.position, transform.position);
 
-        if(distancia < 4) {
+        cambioDaño();
+
+        if(distancia < 2) {
             agente.SetDestination(personaje.position);
             if(this.transform.position.x > personaje.position.x) {
                 spritPersonaje.flipX = false;
@@ -126,6 +129,16 @@ public class Fantasma : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("Player")) {
             anim.SetTrigger("Ataca");
+        }
+    }
+
+    private void cambioDaño () {
+        float value = numeros[i];
+        i++;
+        if(value > 0.8) {
+            daño = 10;
+        }else{
+            daño = 2;
         }
     }
 }

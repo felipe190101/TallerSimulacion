@@ -10,6 +10,7 @@ TagManager:
   - salida_mina
   - salida_castillo
   - salida_volcan
+  - Enemigo
   layers:
   - Default
   - TransparentFX

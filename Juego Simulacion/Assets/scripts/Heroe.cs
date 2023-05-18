@@ -11,9 +11,16 @@ public class Heroe : MonoBehaviour
     private SpriteRenderer spritPersonaje;
     private vida sistemaVida;
     [SerializeField] private int vidaPersonaje;
+    [SerializeField] private BoxCollider2D colEspada;
+    [SerializeField] private GameObject textGameOver;
+    [SerializeField] private GameObject iconMuerte;
    
+    private float posColX = 0.3f;
+    private float posColY = 0; 
 
     public float speed = 5.0f;
+
+    private Fantasma fantasma;
 
     private void Start() {
         rig = GetComponent<Rigidbody2D>();
@@ -23,11 +30,17 @@ public class Heroe : MonoBehaviour
         sistemaVida.setVida(vidaPersonaje);
         sistemaVida.iniciarVIda();
 
-
+        GameObject fan = GameObject.Find("Fantasma");
+        fantasma = fan.GetComponent<Fantasma>();
     }
 
     void Update()
     {
+
+        if(Input.GetMouseButtonDown(0)) {
+            anim.SetTrigger("Ataca");
+        }
+
         float movimientoHorizontal = Input.GetAxis("Horizontal");
         float movimientoVertical = Input.GetAxis("Vertical");
 
@@ -36,9 +49,10 @@ public class Heroe : MonoBehaviour
         anim.SetFloat("Camina",Mathf.Abs(rig.velocity.magnitude));
 
         if(movimientoHorizontal > 0) {
-            spritPersonaje.flipX = true;
-            
+            colEspada.offset = new Vector2(posColX, posColY);
+            spritPersonaje.flipX = true; 
         }else if(movimientoHorizontal < 0) {
+            colEspada.offset = new Vector2(-posColX, posColY);
             spritPersonaje.flipX = false;
         }
     }
@@ -66,13 +80,13 @@ public class Heroe : MonoBehaviour
     }
 
     public void CausarHerida () {
-        if(vidaPersonaje > 0) {
-            vidaPersonaje--;
-            Debug.Log(vidaPersonaje);
+    if(vidaPersonaje > 0) {
+            vidaPersonaje = vidaPersonaje - fantasma.daño ;
             sistemaVida.setVida(vidaPersonaje);
 
-            if(vidaPersonaje == 0) {
-                //Debug.Log("Se acabaron las vidas perro");
+            if(vidaPersonaje <= 0) {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
             }
         }
     }

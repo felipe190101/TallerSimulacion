@@ -17,6 +17,8 @@ public class Fantasma : MonoBehaviour
     private float[] numeros;
     private int i;
 
+    private NavMeshAgent agente;
+
 
     private Vector2 targetPosition;
     private float elapsedFrames = 0f;
@@ -29,6 +31,7 @@ public class Fantasma : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         spritPersonaje = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
+        agente = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
@@ -36,6 +39,8 @@ public class Fantasma : MonoBehaviour
         i = 0;
         numeros = generateNumbers();
         targetPosition = GetRandomTargetPosition();
+        agente.updateRotation = false;
+        agente.updateUpAxis = false;
     
     }
 
@@ -43,20 +48,31 @@ public class Fantasma : MonoBehaviour
     {
         rig = GetComponent<Rigidbody2D>();
 
-        elapsedFrames++;
-        if (controlMovimiento > 0)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(personaje.position.x,personaje.position.y), velocidad);
-        }else{
-            if (elapsedFrames >= 60f)
-            {
-            elapsedFrames = 0f;
-            targetPosition = GetRandomTargetPosition();
+        this.transform.position = new Vector3(transform.position.x,transform.position.y,0);
+        float distancia = Vector3.Distance(personaje.position, transform.position);
+
+        if(distancia < 4) {
+            agente.SetDestination(personaje.position);
+            if(this.transform.position.x > personaje.position.x) {
+                spritPersonaje.flipX = false;
+            }else{
+                spritPersonaje.flipX = true;
+
             }
+        }else{
+            elapsedFrames++;
+            if (elapsedFrames >= 60f){
+                elapsedFrames = 0f;
+                targetPosition = GetRandomTargetPosition();
+
+                MoveTowardsTarget();
+            }
+
         }
+    
         
 
-        MoveTowardsTarget();
+        
     }
 
     private void MoveTowardsTarget()
@@ -76,27 +92,17 @@ public class Fantasma : MonoBehaviour
         float x = currentPosition.x;
         float y = currentPosition.y;
 
-        
-
-
-        if (value <= 0.25f)
-        {
+        if (value <= 0.25f){
             x += 2f;
-             
             spritPersonaje.flipX = true;
-
         }
-        else if (value > 0.25f && value <= 0.5f)
-        {
+        else if (value > 0.25f && value <= 0.5f){   
             x -= 2f;
             spritPersonaje.flipX = false;
         }
-        else if (value > 0.5f && value <= 0.75f)
-        {
+        else if (value > 0.5f && value <= 0.75f){    
             y += 2f;
-        }
-        else
-        {
+        }else{   
             y -= 2f;
         }
 

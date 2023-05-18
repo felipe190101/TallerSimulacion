@@ -86,7 +86,7 @@ public class Fantasma : MonoBehaviour
 
     private Vector2 GetRandomTargetPosition()
     {
-
+        Debug.Log(i);
         float value = numeros[i];
         i++;
 
@@ -126,6 +126,7 @@ public class Fantasma : MonoBehaviour
         return numeros;
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("Player")) {
             anim.SetTrigger("Ataca");
@@ -133,12 +134,59 @@ public class Fantasma : MonoBehaviour
     }
 
     private void cambioDaño () {
-        float value = numeros[i];
-        i++;
-        if(value > 0.8) {
-            daño = 10;
-        }else{
-            daño = 2;
-        }
+        //montecarlo();
     }
+
+    private void montecarlo()
+    {
+        int debil = 0;
+        int medio = 0;
+        int fuerte = 0;
+
+        float[] aleatorios = numeros;
+        for (int i = 0; i < 100; i++)
+        {
+            switch (aleatorios[i])
+            {
+                case var n when (n >= 0 && n <= 0.4f):
+                    debil++;
+                    break;
+                    
+                case var n when (n > 0.4f && n <= 0.9f):
+                    medio++;
+                    break;
+                    
+                case var n when (n > 0.9f && n <= 1f):
+                    fuerte++;
+                    break;
+ 
+                default:
+                    break;
+            }
+        }
+
+        float probDebil = debil/100;
+        float probMedio = medio/100;
+        float probFuerte = fuerte/100;
+
+        float dato = numeros[100];
+        switch (dato)
+            {
+                case var n when (n >= 0 && n <= probDebil):
+                    daño = 2;
+                    break;
+                    
+                case var n when (n > probDebil && n <= probDebil + probMedio):
+                    daño = 5;
+                    break;
+                    
+                case var n when (probDebil + probMedio > 0.9f && n <= 1f):
+                     daño = 10;
+                    break;
+ 
+                default:
+                    break;
+            }
+    }
+
 }

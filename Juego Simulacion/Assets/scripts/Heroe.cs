@@ -20,6 +20,14 @@ public class Heroe : MonoBehaviour
     private float sprintSpeed;
 
     private Fantasma fantasma;
+    private Murcielago murcielago;
+    private Esqueleto esqueleto;
+    private Diablo diablo;
+    private Diablillo diablillo;
+    private Goblin goblin;
+    private Hongo hongo;
+    private Gusano gusano;
+    private Slime slime;
 
     private void Start()
     {
@@ -30,8 +38,34 @@ public class Heroe : MonoBehaviour
         sistemaVida.setVida(vidaPersonaje);
         sistemaVida.iniciarVIda();
 
-        GameObject fan = GameObject.Find("Fantasma");
-        fantasma = fan.GetComponent<Fantasma>();
+        /*GameObject fan = GameObject.Find("Fantasma");
+        fantasma = fan.GetComponent<Fantasma>();*/
+
+        /*GameObject mur = GameObject.Find("Murcielago");
+        murcielago = mur.GetComponent<Murcielago>();*/
+
+        /*GameObject esq = GameObject.Find("Esqueleto");
+        
+        esqueleto= esq.GetComponent<Esqueleto>();
+
+        /*GameObject dia = GameObject.Find("Diablo");
+        
+        diablo = dia.GetComponent<Diablo>();*/
+
+        /*GameObject diabli = GameObject.Find("Diablillo");
+        diablillo = diabli.GetComponent<Diablillo>();*/
+
+        /*GameObject gob = GameObject.Find("Goblin");
+        goblin = gob.GetComponent<Goblin>();*/
+
+        /*GameObject hon = GameObject.Find("Hongo");
+        hongo = hon.GetComponent<Hongo>();*/
+
+        /*GameObject gus = GameObject.Find("Gusano");
+        gusano = gus.GetComponent<Gusano>();*/
+
+        GameObject sli = GameObject.Find("Slime");
+        slime = sli.GetComponent<Slime>();
     }
 
     void Update()
@@ -105,11 +139,131 @@ public class Heroe : MonoBehaviour
         }
     }
 
-    public void CausarHerida()
+    public void CausarHeridaFantasma()
     {
         if (vidaPersonaje > 0)
         {
             vidaPersonaje -= fantasma.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaEsqueleto()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= esqueleto.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaMurcielago()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= murcielago.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaDiablillo()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= diablillo.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaDiablo()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= diablo.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaGoblin()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= goblin.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaHongo()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= hongo.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaGusano()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= gusano.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaSlime()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= slime.daño;
             sistemaVida.setVida(vidaPersonaje);
 
             if (vidaPersonaje <= 0)
@@ -135,7 +289,6 @@ public class Heroe : MonoBehaviour
     {
         sprintSpeed += 2 * Time.deltaTime;
         sprintSpeed = Mathf.Clamp(sprintSpeed, 0.0f, 10);
-        Debug.Log(sprintSpeed);
 
         float movimientoHorizontal = Input.GetAxis("Horizontal");
         float movimientoVertical = Input.GetAxis("Vertical");

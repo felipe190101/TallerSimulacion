@@ -171,19 +171,20 @@ public class Diablo : MonoBehaviour
         float probMedio = medio/100;
         float probFuerte = fuerte/100;
 
-        float dato = numeros[100];
+        float dato = numeros[i];
+        i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 2;
+                    daño = 10;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 5;
+                    daño = 30;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 10;
+                     daño = 50;
                     break;
  
                 default:

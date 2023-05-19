@@ -169,7 +169,8 @@ public class Hongo : MonoBehaviour
         float probMedio = medio/100;
         float probFuerte = fuerte/100;
 
-        float dato = numeros[100];
+        float dato = numeros[i];
+        i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):

@@ -38,31 +38,31 @@ public class Heroe : MonoBehaviour
         sistemaVida.setVida(vidaPersonaje);
         sistemaVida.iniciarVIda();
 
-        /*GameObject fan = GameObject.Find("Fantasma");
-        fantasma = fan.GetComponent<Fantasma>();*/
+        GameObject fan = GameObject.Find("Fantasma");
+        fantasma = fan.GetComponent<Fantasma>();
 
-        /*GameObject mur = GameObject.Find("Murcielago");
-        murcielago = mur.GetComponent<Murcielago>();*/
+        GameObject mur = GameObject.Find("Murcielago");
+        murcielago = mur.GetComponent<Murcielago>();
 
-        /*GameObject esq = GameObject.Find("Esqueleto");
+        GameObject esq = GameObject.Find("Esqueleto");
         
         esqueleto= esq.GetComponent<Esqueleto>();
 
-        /*GameObject dia = GameObject.Find("Diablo");
+        GameObject dia = GameObject.Find("Diablo");
         
-        diablo = dia.GetComponent<Diablo>();*/
+        diablo = dia.GetComponent<Diablo>();
 
-        /*GameObject diabli = GameObject.Find("Diablillo");
-        diablillo = diabli.GetComponent<Diablillo>();*/
+        GameObject diabli = GameObject.Find("Diablillo");
+        diablillo = diabli.GetComponent<Diablillo>();
 
-        /*GameObject gob = GameObject.Find("Goblin");
-        goblin = gob.GetComponent<Goblin>();*/
+        GameObject gob = GameObject.Find("Goblin");
+        goblin = gob.GetComponent<Goblin>();
 
-        /*GameObject hon = GameObject.Find("Hongo");
-        hongo = hon.GetComponent<Hongo>();*/
+        GameObject hon = GameObject.Find("Hongo");
+        hongo = hon.GetComponent<Hongo>();
 
-        /*GameObject gus = GameObject.Find("Gusano");
-        gusano = gus.GetComponent<Gusano>();*/
+        GameObject gus = GameObject.Find("Gusano");
+        gusano = gus.GetComponent<Gusano>();
 
         GameObject sli = GameObject.Find("Slime");
         slime = sli.GetComponent<Slime>();

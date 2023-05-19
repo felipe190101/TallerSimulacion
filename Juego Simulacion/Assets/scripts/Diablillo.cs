@@ -10,6 +10,7 @@ public class Diablillo : MonoBehaviour
     [SerializeField] private int cantidad;
     [SerializeField] private int multiplicador;
     [SerializeField] public int daño;
+    [SerializeField] public int vidaJefe;
     [SerializeField] public float escalaX;
     [SerializeField] public float escalaY;
 
@@ -134,7 +135,7 @@ public class Diablillo : MonoBehaviour
     }
 
     private void cambioDaño () {
-        //montecarlo();
+        montecarlo();
     }
 
     private void montecarlo()
@@ -169,24 +170,41 @@ public class Diablillo : MonoBehaviour
         float probMedio = medio/100;
         float probFuerte = fuerte/100;
 
-        float dato = numeros[100];
+        float dato = numeros[i];
+        i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 2;
+                    daño = 30;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 5;
+                    daño = 35;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 10;
+                     daño = 50;
                     break;
  
                 default:
                     break;
             }
+    }
+
+    public IEnumerator recibirDaño()
+    {
+        
+        spritPersonaje.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spritPersonaje.color = Color.white;
+        
+
+        vidaJefe--;
+        if(vidaJefe <= 0)
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
 }

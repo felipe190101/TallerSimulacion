@@ -9,7 +9,6 @@ public class Fantasma : MonoBehaviour
     [SerializeField] private float velocidad;
     [SerializeField] private int cantidad;
     [SerializeField] private int multiplicador;
-    [SerializeField] private int controlMovimiento;
     [SerializeField] public int daño;
 
     private Animator anim;
@@ -58,8 +57,12 @@ public class Fantasma : MonoBehaviour
             agente.SetDestination(personaje.position);
             if(this.transform.position.x > personaje.position.x) {
                 spritPersonaje.flipX = false;
+                transform.localScale = new Vector2(3,3);
+           
             }else{
                 spritPersonaje.flipX = true;
+                transform.localScale = new Vector2(-3,3);
+                
             }
         }else{
             elapsedFrames++;
@@ -86,7 +89,6 @@ public class Fantasma : MonoBehaviour
 
     private Vector2 GetRandomTargetPosition()
     {
-        Debug.Log(i);
         float value = numeros[i];
         i++;
 

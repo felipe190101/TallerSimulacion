@@ -49,8 +49,9 @@ public class FantasmaJefe : MonoBehaviour
     {
         string scenaName = SceneManager.GetActiveScene().name;
         if(!string.Equals(scenaName, "MundoAbierto") ) {
-            sistemaVida.setVida(vidaJefe);
-            sistemaVida.iniciarVIda();
+        sistemaVida.setVidaMaxima(vidaJefe);
+        sistemaVida.setVida(vidaJefe);
+        sistemaVida.iniciarVIda();
         }   
         i = 0;
         numeros = generateNumbers();
@@ -221,6 +222,9 @@ public class FantasmaJefe : MonoBehaviour
             textoJefeDerrotado.SetActive(true);
             iconoJefeDerrotado.SetActive(true);
             llaveFuego.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            textoJefeDerrotado.SetActive(false);
+            iconoJefeDerrotado.SetActive(false);
         }
         
     }

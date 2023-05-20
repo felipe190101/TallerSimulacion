@@ -39377,7 +39377,14 @@ MonoBehaviour:
   iconoJefeDerrotado: {fileID: 2015753353}
   textoLlaveConseguida: {fileID: 1562964828}
   iconoLlaveConseguida: {fileID: 343125825}
+  iconoLlaveMina: {fileID: 0}
+  iconoLlaveCastillo: {fileID: 0}
+  iconoLlaveVolcan: {fileID: 0}
+  iconoLlaveNieve: {fileID: 0}
+  iconoLlaveFuego: {fileID: 0}
+  textoFaltaLlaveNieve: {fileID: 0}
   speed: 5
+  llaveHielo: 0
 --- !u!4 &2045033413
 Transform:
   m_ObjectHideFlags: 0

@@ -11,17 +11,24 @@ public class vida : MonoBehaviour
     [SerializeField] TextMeshProUGUI textoJefe;
 
     private int vidaPersonaje;
+    private int vidaPersonajeMaxima;
+
 
     public void iniciarVIda()
     {
-        barraVida.maxValue = vidaPersonaje;
-        barraVida.value = barraVida.maxValue;
+        barraVida.maxValue = vidaPersonajeMaxima;
+        barraVida.value = vidaPersonaje;
     }
 
     public void setVida(int cantidadVida)
     {
         this.vidaPersonaje = cantidadVida;
         barraVida.value = vidaPersonaje;
+    }
+
+    public void setVidaMaxima(int cantidadVidaMaxima)
+    {
+        this.vidaPersonajeMaxima = cantidadVidaMaxima;
     }
 
     public void destruirBarra()

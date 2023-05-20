@@ -50,6 +50,7 @@ public class DiabloJefe : MonoBehaviour
     {
         string scenaName = SceneManager.GetActiveScene().name;
         if(!string.Equals(scenaName, "MundoAbierto") ) {
+        sistemaVida.setVidaMaxima(vidaJefe);
         sistemaVida.setVida(vidaJefe);
         sistemaVida.iniciarVIda();
          }
@@ -151,7 +152,7 @@ public class DiabloJefe : MonoBehaviour
     }
 
     private void cambioDaño () {
-        //montecarlo();
+        montecarlo();
     }
 
     private void montecarlo()
@@ -224,6 +225,9 @@ public class DiabloJefe : MonoBehaviour
             textoJefeDerrotado.SetActive(true);
             iconoJefeDerrotado.SetActive(true);
             llaveFinal.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            textoJefeDerrotado.SetActive(false);
+            iconoJefeDerrotado.SetActive(false);
         }
         
     }

@@ -67,7 +67,7 @@ private vida sistemaVida;
         string scenaName = SceneManager.GetActiveScene().name;
 
         if(!string.Equals(scenaName, "MundoAbierto") ) {
-        
+        sistemaVida.setVidaMaxima(vidaJefe);
         sistemaVida.setVida(vidaJefe);
         sistemaVida.iniciarVIda();
         initScene = false;
@@ -232,16 +232,13 @@ private vida sistemaVida;
             Destroy(gameObject);
             sistemaVida.destruirBarra();
             textoJefeDerrotado.SetActive(true);
-            //StartCoroutine(OcultarTextoDespuesDeTiempo(1f));
             iconoJefeDerrotado.SetActive(true);
             llaveHielo.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            textoJefeDerrotado.SetActive(false);
+            iconoJefeDerrotado.SetActive(false);
         }
         
-    }
-
-    IEnumerator OcultarTextoDespuesDeTiempo(float tiempo){
-        yield return new WaitForSeconds(tiempo);
-        textoJefeDerrotado.gameObject.SetActive(false);
     }
 
    

@@ -10,7 +10,8 @@ public class Heroe : MonoBehaviour
     private Animator anim;
     private SpriteRenderer spritPersonaje;
     private vida sistemaVida;
-    [SerializeField] private int vidaPersonaje;
+    private Atributos atributos;
+    private int vidaPersonaje;
     [SerializeField] private BoxCollider2D colEspada;
     [SerializeField] private GameObject textGameOver;
     [SerializeField] private GameObject iconMuerte;    
@@ -51,13 +52,19 @@ public class Heroe : MonoBehaviour
 
     private bool miLlaveHieloBooleana;
 
+    private void Awake()
+    {
+        atributos = Atributos.Instance;
+    }
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         spritPersonaje = GetComponentInChildren<SpriteRenderer>();
         sistemaVida = GetComponent<vida>();
-        sistemaVida.setVida(vidaPersonaje);
+        sistemaVida.setVidaMaxima(atributos.getVidaMaximaPersonaje());
+        sistemaVida.setVida(atributos.getVidaPersonaje());
         sistemaVida.iniciarVIda();
 
         string scenaName = SceneManager.GetActiveScene().name;
@@ -175,17 +182,19 @@ public class Heroe : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Botiquin"))
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje += 100;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("llaveNieve")){
             textoJefeDerrotado.SetActive(false);
             iconoJefeDerrotado.SetActive(false);
             Destroy(collision.gameObject);
-            textoLlaveConseguida.SetActive(true);
-            iconoLlaveConseguida.SetActive(true);
+            StartCoroutine(textoLlave());
         }
+
 
         /*if (collision.gameObject.CompareTag("llaveFuego")){
             llaveFuego = true;
@@ -208,14 +217,25 @@ public class Heroe : MonoBehaviour
         }
     }
 
+    public IEnumerator textoLlave()
+        {
+            textoLlaveConseguida.SetActive(true);
+            iconoLlaveConseguida.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            textoLlaveConseguida.SetActive(false);
+            iconoLlaveConseguida.SetActive(false);
+        }
+
     public void CausarHeridaFantasma()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= fantasma.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -227,12 +247,15 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaEsqueleto()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= esqueleto.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -245,12 +268,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaMurcielago()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= murcielago.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -262,12 +287,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaDiablillo()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= diablillo.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -279,12 +306,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaDiablo()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= diablo.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -296,12 +325,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaGoblin()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= goblin.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -313,12 +344,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaHongo()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= hongo.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -330,12 +363,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaGusano()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= gusano.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -347,12 +382,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaSlime()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= slime.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -364,12 +401,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaHongoJefe()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= hongoJefe.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -381,12 +420,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaFantasmaJefe()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= fantasmaJefe.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
@@ -398,12 +439,14 @@ public class Heroe : MonoBehaviour
 
     public void CausarHeridaDiabloJefe()
     {
-        if (vidaPersonaje > 0)
+        if (atributos.getVidaPersonaje() > 0)
         {
+            vidaPersonaje = atributos.getVidaPersonaje();
             vidaPersonaje -= diabloJefe.daño;
             sistemaVida.setVida(vidaPersonaje);
+            atributos.setVidaPersonaje(vidaPersonaje);
 
-            if (vidaPersonaje <= 0)
+            if (atributos.getVidaPersonaje() <= 0)
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);

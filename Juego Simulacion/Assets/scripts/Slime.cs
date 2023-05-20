@@ -192,8 +192,6 @@ public class Slime : MonoBehaviour
                 default:
                     break;
             }
-
-             Debug.Log(daño);
     }
 
     

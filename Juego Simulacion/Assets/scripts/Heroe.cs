@@ -10,7 +10,10 @@ public class Heroe : MonoBehaviour
     [SerializeField] private int vidaPersonaje;
     [SerializeField] private BoxCollider2D colEspada;
     [SerializeField] private GameObject textGameOver;
-    [SerializeField] private GameObject iconMuerte;
+    [SerializeField] private GameObject iconMuerte;    
+    //[SerializeField] private GameObject textoLlaveNieveConseguida;
+    //[SerializeField] private GameObject iconoLlaveNieveConseguida;
+    [SerializeField] private GameObject botonReinicio;
 
     private float posColX = 0.3f;
     private float posColY = 0;
@@ -20,12 +23,15 @@ public class Heroe : MonoBehaviour
     private float sprintSpeed;
 
     private Fantasma fantasma;
+    private FantasmaJefe fantasmaJefe;
     private Murcielago murcielago;
     private Esqueleto esqueleto;
     private Diablo diablo;
+    private DiabloJefe diabloJefe;
     private Diablillo diablillo;
     private Goblin goblin;
     private Hongo hongo;
+    private HongoJefe hongoJefe;
     private Gusano gusano;
     private Slime slime;
 
@@ -40,7 +46,7 @@ public class Heroe : MonoBehaviour
 
         string scenaName = SceneManager.GetActiveScene().name;
 
-        if(string.Equals(scenaName, "Nivel1")) {
+        if(string.Equals(scenaName, "MundoAbierto")) {
             GameObject fan = GameObject.Find("Fantasma");
             fantasma = fan.GetComponent<Fantasma>();
 
@@ -68,14 +74,14 @@ public class Heroe : MonoBehaviour
             GameObject sli = GameObject.Find("Slime");
             slime = sli.GetComponent<Slime>();
         }else if(string.Equals(scenaName, "Mina")){
-            GameObject hon = GameObject.Find("Hongo");
-            hongo = hon.GetComponent<Hongo>();
+            GameObject hong = GameObject.Find("Hongo");
+            hongoJefe = hong.GetComponent<HongoJefe>();
         }else if(string.Equals(scenaName, "Castillo Nieve")){
-            GameObject fan = GameObject.Find("Fantasma");
-            fantasma = fan.GetComponent<Fantasma>();
+            GameObject fant = GameObject.Find("Fantasma");
+            fantasmaJefe = fant.GetComponent<FantasmaJefe>();
         }else if(string.Equals(scenaName, "Volcan")){
-            GameObject dia = GameObject.Find("Diablo");
-            diablo = dia.GetComponent<Diablo>();
+            GameObject diab = GameObject.Find("Diablo");
+            diabloJefe = diab.GetComponent<DiabloJefe>();
         }
     }
 
@@ -130,7 +136,7 @@ public class Heroe : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("salida_mina"))
         {
-            SceneManager.LoadScene("Nivel1");
+            SceneManager.LoadScene("MundoAbierto");
         }
         if (collision.gameObject.CompareTag("PuertaCastillo"))
         {
@@ -138,7 +144,7 @@ public class Heroe : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("salida_castillo"))
         {
-            SceneManager.LoadScene("Nivel1");
+            SceneManager.LoadScene("MundoAbierto");
         }
         if (collision.gameObject.CompareTag("PuertaVolcan"))
         {
@@ -146,7 +152,13 @@ public class Heroe : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("salida_volcan"))
         {
-            SceneManager.LoadScene("Nivel1");
+            SceneManager.LoadScene("MundoAbierto");
+        }
+        if (collision.gameObject.CompareTag("Botiquin"))
+        {
+            vidaPersonaje += 100;
+            sistemaVida.setVida(vidaPersonaje);
+            Destroy(collision.gameObject);
         }
     }
 
@@ -161,6 +173,8 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -176,6 +190,9 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
+
             }
         }
     }
@@ -191,6 +208,8 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -206,6 +225,8 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -221,6 +242,8 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -236,6 +259,8 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -251,6 +276,8 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -266,6 +293,8 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -281,6 +310,59 @@ public class Heroe : MonoBehaviour
             {
                 textGameOver.SetActive(true);
                 iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaHongoJefe()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= hongoJefe.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaFantasmaJefe()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= fantasmaJefe.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
+            }
+        }
+    }
+
+    public void CausarHeridaDiabloJefe()
+    {
+        if (vidaPersonaje > 0)
+        {
+            vidaPersonaje -= diabloJefe.daño;
+            sistemaVida.setVida(vidaPersonaje);
+
+            if (vidaPersonaje <= 0)
+            {
+                textGameOver.SetActive(true);
+                iconMuerte.SetActive(true);
+                Time.timeScale = 0f;
+                botonReinicio.SetActive(true);
             }
         }
     }
@@ -306,5 +388,11 @@ public class Heroe : MonoBehaviour
 
         Vector2 sprintVelocity = new Vector2(movimientoHorizontal, movimientoVertical) * sprintSpeed;
         rig.velocity = sprintVelocity;
+    }
+
+    public void ReiniciarJuego(){
+        SceneManager.LoadScene("MundoAbierto");
+        Time.timeScale = 1f;
+        
     }
 }

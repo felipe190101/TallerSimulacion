@@ -25,6 +25,7 @@ private vida sistemaVida;
     private bool initScene;
 
     private NavMeshAgent agente;
+    
 
 
     private Vector2 targetPosition;
@@ -32,6 +33,9 @@ private vida sistemaVida;
     private bool objetivoDetectado;
 
     public Transform personaje;
+
+
+    public float timeToDisappear = 3f;
 
     private void Awake()
     {
@@ -60,14 +64,15 @@ private vida sistemaVida;
         if(initScene){
         string scenaName = SceneManager.GetActiveScene().name;
 
-        if(!string.Equals(scenaName, "Nivel1") ) {
+        if(!string.Equals(scenaName, "MundoAbierto") ) {
         
-        Debug.Log(vidaJefe);
         sistemaVida.setVida(vidaJefe);
         sistemaVida.iniciarVIda();
         initScene = false;
          }
         }
+
+
         rig = GetComponent<Rigidbody2D>();
 
         this.transform.position = new Vector3(transform.position.x,transform.position.y,0);
@@ -227,5 +232,7 @@ private vida sistemaVida;
         }
         
     }
+
+   
 
 }

@@ -7,6 +7,9 @@ public class Espada : MonoBehaviour
 {
     private BoxCollider2D colEspada;
     private Diablillo diablillo;
+    private HongoJefe hongoJefe;
+    private FantasmaJefe fantasmaJefe;
+    private DiabloJefe diabloJefe;
     private Hongo hongo;
     private Fantasma fantasma;
     private Diablo diablo;
@@ -18,7 +21,7 @@ public class Espada : MonoBehaviour
 
         string scenaName = SceneManager.GetActiveScene().name;
     
-        if(string.Equals(scenaName, "Nivel1") ) {
+        if(string.Equals(scenaName, "MundoAbierto") ) {
             GameObject diabli = GameObject.Find("Diablillo");
             diablillo = diabli.GetComponent<Diablillo>();
             GameObject fan = GameObject.Find("Fantasma");
@@ -29,13 +32,13 @@ public class Espada : MonoBehaviour
             hongo = hon.GetComponent<Hongo>();
         }else if(string.Equals(scenaName, "Mina")){
             GameObject hon = GameObject.Find("Hongo");
-            hongo = hon.GetComponent<Hongo>();
+            hongoJefe = hon.GetComponent<HongoJefe>();
         }else if(string.Equals(scenaName, "Castillo Nieve")){
             GameObject fan = GameObject.Find("Fantasma");
-            fantasma = fan.GetComponent<Fantasma>();
+            fantasmaJefe = fan.GetComponent<FantasmaJefe>();
         }else if(string.Equals(scenaName, "Volcan")){
             GameObject dia = GameObject.Find("Diablo");
-            diablo = dia.GetComponent<Diablo>();
+            diabloJefe = dia.GetComponent<DiabloJefe>();
         }
 
         
@@ -54,19 +57,19 @@ public class Espada : MonoBehaviour
 
         if(collision.CompareTag("JefeHongo"))
         {
-            StartCoroutine(hongo.recibirDaño());
+            StartCoroutine(hongoJefe.recibirDaño());
            
         }
 
         if(collision.CompareTag("JefeDiablo"))
         {
-            StartCoroutine(diablo.recibirDaño());
+            StartCoroutine(diabloJefe.recibirDaño());
            
         }
 
         if(collision.CompareTag("JefeFantasma"))
         {
-            StartCoroutine(fantasma.recibirDaño());
+            StartCoroutine(fantasmaJefe.recibirDaño());
            
         }
     }

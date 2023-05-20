@@ -45,7 +45,7 @@ public class Diablo : MonoBehaviour
     private void Start()
     {
         string scenaName = SceneManager.GetActiveScene().name;
-        if(!string.Equals(scenaName, "Nivel1") ) {
+        if(!string.Equals(scenaName, "MundoAbierto") ) {
         sistemaVida.setVida(vidaJefe);
         sistemaVida.iniciarVIda();
          }

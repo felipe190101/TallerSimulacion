@@ -14,7 +14,6 @@ public class vida : MonoBehaviour
 
     public void iniciarVIda()
     {
-        Debug.Log(vidaPersonaje);
         barraVida.maxValue = vidaPersonaje;
         barraVida.value = barraVida.maxValue;
     }

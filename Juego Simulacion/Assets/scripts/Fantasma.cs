@@ -45,9 +45,9 @@ public class Fantasma : MonoBehaviour
     private void Start()
     {
         string scenaName = SceneManager.GetActiveScene().name;
-      if(!string.Equals(scenaName, "Nivel1") ) {
-        sistemaVida.setVida(vidaJefe);
-        sistemaVida.iniciarVIda();
+        if(!string.Equals(scenaName, "MundoAbierto") ) {
+            sistemaVida.setVida(vidaJefe);
+            sistemaVida.iniciarVIda();
         }   
         i = 0;
         numeros = generateNumbers();

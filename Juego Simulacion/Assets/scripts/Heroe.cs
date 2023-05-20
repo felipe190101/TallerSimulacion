@@ -38,34 +38,45 @@ public class Heroe : MonoBehaviour
         sistemaVida.setVida(vidaPersonaje);
         sistemaVida.iniciarVIda();
 
-        GameObject fan = GameObject.Find("Fantasma");
-        fantasma = fan.GetComponent<Fantasma>();
+        string scenaName = SceneManager.GetActiveScene().name;
 
-        GameObject mur = GameObject.Find("Murcielago");
-        murcielago = mur.GetComponent<Murcielago>();
+        if(string.Equals(scenaName, "Nivel1")) {
+            GameObject fan = GameObject.Find("Fantasma");
+            fantasma = fan.GetComponent<Fantasma>();
 
-        GameObject esq = GameObject.Find("Esqueleto");
-        
-        esqueleto= esq.GetComponent<Esqueleto>();
+            GameObject mur = GameObject.Find("Murcielago");
+            murcielago = mur.GetComponent<Murcielago>();
 
-        GameObject dia = GameObject.Find("Diablo");
-        
-        diablo = dia.GetComponent<Diablo>();
+            GameObject esq = GameObject.Find("Esqueleto");
+            esqueleto= esq.GetComponent<Esqueleto>();
 
-        GameObject diabli = GameObject.Find("Diablillo");
-        diablillo = diabli.GetComponent<Diablillo>();
+            GameObject dia = GameObject.Find("Diablo");
+            diablo = dia.GetComponent<Diablo>();
 
-        GameObject gob = GameObject.Find("Goblin");
-        goblin = gob.GetComponent<Goblin>();
+            GameObject diabli = GameObject.Find("Diablillo");
+            diablillo = diabli.GetComponent<Diablillo>();
 
-        GameObject hon = GameObject.Find("Hongo");
-        hongo = hon.GetComponent<Hongo>();
+            GameObject gob = GameObject.Find("Goblin");
+            goblin = gob.GetComponent<Goblin>();
 
-        GameObject gus = GameObject.Find("Gusano");
-        gusano = gus.GetComponent<Gusano>();
+            GameObject hon = GameObject.Find("Hongo");
+            hongo = hon.GetComponent<Hongo>();
 
-        GameObject sli = GameObject.Find("Slime");
-        slime = sli.GetComponent<Slime>();
+            GameObject gus = GameObject.Find("Gusano");
+            gusano = gus.GetComponent<Gusano>();
+
+            GameObject sli = GameObject.Find("Slime");
+            slime = sli.GetComponent<Slime>();
+        }else if(string.Equals(scenaName, "Mina")){
+            GameObject hon = GameObject.Find("Hongo");
+            hongo = hon.GetComponent<Hongo>();
+        }else if(string.Equals(scenaName, "Castillo Nieve")){
+            GameObject fan = GameObject.Find("Fantasma");
+            fantasma = fan.GetComponent<Fantasma>();
+        }else if(string.Equals(scenaName, "Volcan")){
+            GameObject dia = GameObject.Find("Diablo");
+            diablo = dia.GetComponent<Diablo>();
+        }
     }
 
     void Update()

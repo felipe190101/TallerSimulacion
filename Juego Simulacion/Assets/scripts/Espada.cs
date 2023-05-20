@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Espada : MonoBehaviour
 {
@@ -12,8 +13,14 @@ public class Espada : MonoBehaviour
 
         colEspada = GetComponent<BoxCollider2D>();
 
-        GameObject diabli = GameObject.Find("Diablillo");
-        diablillo = diabli.GetComponent<Diablillo>();
+        string scenaName = SceneManager.GetActiveScene().name;
+    
+        if(string.Equals(scenaName, "Nivel1") ) {
+            GameObject diabli = GameObject.Find("Diablillo");
+            diablillo = diabli.GetComponent<Diablillo>();
+        }
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

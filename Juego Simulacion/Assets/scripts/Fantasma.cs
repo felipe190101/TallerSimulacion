@@ -54,7 +54,6 @@ public class Fantasma : MonoBehaviour
 
         
         cambioDaño();
-        Debug.Log(daño);
         if(distancia < 2) {
             agente.SetDestination(personaje.position);
             if(this.transform.position.x > personaje.position.x) {

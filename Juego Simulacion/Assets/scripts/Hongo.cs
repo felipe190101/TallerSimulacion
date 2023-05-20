@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+
 
 
 public class Hongo : MonoBehaviour
@@ -10,14 +12,17 @@ public class Hongo : MonoBehaviour
     [SerializeField] private int cantidad;
     [SerializeField] private int multiplicador;
     [SerializeField] public int daño;
+    [SerializeField] public int vidaJefe;
     [SerializeField] public float escalaX;
     [SerializeField] public float escalaY;
 
+private vida sistemaVida;
     private Animator anim;
     private Rigidbody2D rig;
     private SpriteRenderer spritPersonaje;
     private float[] numeros;
     private int i;
+    private bool initScene;
 
     private NavMeshAgent agente;
 
@@ -30,14 +35,18 @@ public class Hongo : MonoBehaviour
 
     private void Awake()
     {
+        initScene = true;
         rig = GetComponent<Rigidbody2D>();
         spritPersonaje = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         agente = GetComponent<NavMeshAgent>();
+        sistemaVida = GetComponent<vida>();
+         
     }
 
     private void Start()
     {
+        
         i = 0;
         numeros = generateNumbers();
         targetPosition = GetRandomTargetPosition();
@@ -48,6 +57,17 @@ public class Hongo : MonoBehaviour
 
     private void Update()
     {
+        if(initScene){
+        string scenaName = SceneManager.GetActiveScene().name;
+
+        if(!string.Equals(scenaName, "Nivel1") ) {
+        
+        Debug.Log(vidaJefe);
+        sistemaVida.setVida(vidaJefe);
+        sistemaVida.iniciarVIda();
+        initScene = false;
+         }
+        }
         rig = GetComponent<Rigidbody2D>();
 
         this.transform.position = new Vector3(transform.position.x,transform.position.y,0);
@@ -134,7 +154,7 @@ public class Hongo : MonoBehaviour
     }
 
     private void cambioDaño () {
-        //montecarlo();
+        montecarlo();
     }
 
     private void montecarlo()
@@ -188,6 +208,24 @@ public class Hongo : MonoBehaviour
                 default:
                     break;
             }
+    }
+
+    public IEnumerator recibirDaño()
+    {
+        
+        spritPersonaje.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spritPersonaje.color = Color.white;
+        
+
+        vidaJefe--;
+        sistemaVida.setVida(vidaJefe);
+        if(vidaJefe <= 0)
+        {
+            Destroy(gameObject);
+            sistemaVida.destruirBarra();
+        }
+        
     }
 
 }

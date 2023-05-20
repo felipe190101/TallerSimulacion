@@ -11,7 +11,10 @@ TagManager:
   - salida_castillo
   - salida_volcan
   - Enemigo
-  - Jefe
+  - JefeHongo
+  - JefeDiablillo
+  - JefeDiablo
+  - JefeFantasma
   layers:
   - Default
   - TransparentFX

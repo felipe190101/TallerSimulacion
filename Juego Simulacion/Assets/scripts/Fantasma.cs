@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+
 
 
 public class Fantasma : MonoBehaviour
@@ -9,9 +11,12 @@ public class Fantasma : MonoBehaviour
     [SerializeField] private float velocidad;
     [SerializeField] private int cantidad;
     [SerializeField] private int multiplicador;
+    [SerializeField] public int vidaJefe;
+
     
     public int daño;
 
+    private vida sistemaVida;
     private Animator anim;
     private Rigidbody2D rig;
     private SpriteRenderer spritPersonaje;
@@ -33,10 +38,17 @@ public class Fantasma : MonoBehaviour
         spritPersonaje = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         agente = GetComponent<NavMeshAgent>();
+        sistemaVida = GetComponent<vida>();
+       
     }
 
     private void Start()
     {
+        string scenaName = SceneManager.GetActiveScene().name;
+      if(!string.Equals(scenaName, "Nivel1") ) {
+        sistemaVida.setVida(vidaJefe);
+        sistemaVida.iniciarVIda();
+        }   
         i = 0;
         numeros = generateNumbers();
         targetPosition = GetRandomTargetPosition();
@@ -187,6 +199,24 @@ public class Fantasma : MonoBehaviour
                 default:
                     break;
             }
+    }
+
+   public IEnumerator recibirDaño()
+    {
+        
+        spritPersonaje.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spritPersonaje.color = Color.white;
+        
+
+        vidaJefe--;
+        sistemaVida.setVida(vidaJefe);
+        if(vidaJefe <= 0)
+        {
+            Destroy(gameObject);
+            sistemaVida.destruirBarra();
+        }
+        
     }
 
 }

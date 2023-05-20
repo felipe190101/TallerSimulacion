@@ -182,7 +182,7 @@ public class Gusano : MonoBehaviour
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 10;
+                     daño = 3;
                     break;
  
                 default:

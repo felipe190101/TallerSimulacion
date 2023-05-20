@@ -231,11 +231,17 @@ private vida sistemaVida;
         {
             Destroy(gameObject);
             sistemaVida.destruirBarra();
-            //textoJefeDerrotado.SetActive(true);
-            //iconoJefeDerrotado.SetActive(true);
+            textoJefeDerrotado.SetActive(true);
+            //StartCoroutine(OcultarTextoDespuesDeTiempo(1f));
+            iconoJefeDerrotado.SetActive(true);
             llaveHielo.SetActive(true);
         }
         
+    }
+
+    IEnumerator OcultarTextoDespuesDeTiempo(float tiempo){
+        yield return new WaitForSeconds(tiempo);
+        textoJefeDerrotado.gameObject.SetActive(false);
     }
 
    

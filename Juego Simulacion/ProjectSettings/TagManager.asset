@@ -16,6 +16,13 @@ TagManager:
   - JefeDiablo
   - JefeFantasma
   - Botiquin
+  - llaveNieve
+  - llaveFuego
+  - llaveMina
+  - llaveCastillo
+  - llaveVolcan
+  - PuertaNieve
+  - PuertaFuego
   layers:
   - Default
   - TransparentFX

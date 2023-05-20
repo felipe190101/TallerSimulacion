@@ -218,8 +218,8 @@ public class FantasmaJefe : MonoBehaviour
         {
             Destroy(gameObject);
             sistemaVida.destruirBarra();
-            //textoJefeDerrotado.SetActive(true);
-            //iconoJefeDerrotado.SetActive(true);
+            textoJefeDerrotado.SetActive(true);
+            iconoJefeDerrotado.SetActive(true);
             llaveFuego.SetActive(true);
         }
         

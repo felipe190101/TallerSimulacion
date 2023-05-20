@@ -221,8 +221,8 @@ public class DiabloJefe : MonoBehaviour
         {
             Destroy(gameObject);
             sistemaVida.destruirBarra();
-            //textoJefeDerrotado.SetActive(true);
-            //iconoJefeDerrotado.SetActive(true);
+            textoJefeDerrotado.SetActive(true);
+            iconoJefeDerrotado.SetActive(true);
             llaveFinal.SetActive(true);
         }
         

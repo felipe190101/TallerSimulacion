@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class Heroe : MonoBehaviour
 {
@@ -11,15 +14,26 @@ public class Heroe : MonoBehaviour
     [SerializeField] private BoxCollider2D colEspada;
     [SerializeField] private GameObject textGameOver;
     [SerializeField] private GameObject iconMuerte;    
-    //[SerializeField] private GameObject textoLlaveNieveConseguida;
-    //[SerializeField] private GameObject iconoLlaveNieveConseguida;
     [SerializeField] private GameObject botonReinicio;
+    [SerializeField] private GameObject textoJefeDerrotado;
+    [SerializeField] private GameObject iconoJefeDerrotado;
+    [SerializeField] private GameObject textoLlaveConseguida;
+    [SerializeField] private GameObject iconoLlaveConseguida;
+    [SerializeField] private GameObject iconoLlaveMina;
+    [SerializeField] private GameObject iconoLlaveCastillo;
+    [SerializeField] private GameObject iconoLlaveVolcan;
+    [SerializeField] private GameObject iconoLlaveNieve;
+    [SerializeField] private GameObject iconoLlaveFuego;
+    [SerializeField] private GameObject textoFaltaLlaveNieve;
 
     private float posColX = 0.3f;
     private float posColY = 0;
 
     public float speed = 5.0f;
     private bool isSprinting;
+    public bool llaveHielo;
+    private bool llaveFuego;
+    private bool llaveFinal;
     private float sprintSpeed;
 
     private Fantasma fantasma;
@@ -34,6 +48,8 @@ public class Heroe : MonoBehaviour
     private HongoJefe hongoJefe;
     private Gusano gusano;
     private Slime slime;
+
+    private bool miLlaveHieloBooleana;
 
     private void Start()
     {
@@ -126,7 +142,10 @@ public class Heroe : MonoBehaviour
         {
             ApplySprintAcceleration();
         }
+
+        string scenaName = SceneManager.GetActiveScene().name;
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -159,6 +178,33 @@ public class Heroe : MonoBehaviour
             vidaPersonaje += 100;
             sistemaVida.setVida(vidaPersonaje);
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("llaveNieve")){
+            textoJefeDerrotado.SetActive(false);
+            iconoJefeDerrotado.SetActive(false);
+            Destroy(collision.gameObject);
+            textoLlaveConseguida.SetActive(true);
+            iconoLlaveConseguida.SetActive(true);
+        }
+
+        /*if (collision.gameObject.CompareTag("llaveFuego")){
+            llaveFuego = true;
+            textoJefeDerrotado.SetActive(false);
+            iconoJefeDerrotado.SetActive(false);
+            Destroy(collision.gameObject);
+            textoLlaveConseguida.SetActive(true);
+            iconoLlaveConseguida.SetActive(true);
+
+            llaveFuego = true;
+            PlayerPrefs.SetInt("llaveFuego", llaveFuego ? 1 : 0);
+            PlayerPrefs.Save();
+        }*/
+
+        if (collision.gameObject.CompareTag("PuertaNieve") && llaveHielo == true)
+        {
+            Destroy(collision.gameObject);
+        }else if(collision.gameObject.CompareTag("PuertaNieve") && llaveHielo == false){
+            textoFaltaLlaveNieve.SetActive(true);
         }
     }
 

@@ -18,6 +18,8 @@ public class DiabloJefe : MonoBehaviour
     [SerializeField] private GameObject textoJefeDerrotado;
     [SerializeField] private GameObject iconoJefeDerrotado;
 
+    [SerializeField] private GameObject Locket;
+
     public GameObject llaveFinal;
 
     private vida sistemaVida;
@@ -225,9 +227,11 @@ public class DiabloJefe : MonoBehaviour
             textoJefeDerrotado.SetActive(true);
             iconoJefeDerrotado.SetActive(true);
             llaveFinal.SetActive(true);
+            Locket.SetActive(true);
             yield return new WaitForSeconds(3f);
             textoJefeDerrotado.SetActive(false);
             iconoJefeDerrotado.SetActive(false);
+            
         }
         
     }

@@ -67,6 +67,12 @@ public class Espada : MonoBehaviour
            
         }
 
+        if(collision.CompareTag("Diablo"))
+        {
+            StartCoroutine(diablo.recibirDaño());
+           
+        }
+
         if(collision.CompareTag("JefeFantasma"))
         {
             StartCoroutine(fantasmaJefe.recibirDaño());

@@ -25,6 +25,8 @@ TagManager:
   - PuertaFuego
   - PuertaColiseo
   - llaveColiseo
+  - Diablo
+  - Locket
   layers:
   - Default
   - TransparentFX

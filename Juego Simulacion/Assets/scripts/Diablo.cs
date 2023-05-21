@@ -212,11 +212,9 @@ public class Diablo : MonoBehaviour
         
 
         vidaJefe--;
-        sistemaVida.setVida(vidaJefe);
         if(vidaJefe <= 0)
         {
             Destroy(gameObject);
-            sistemaVida.destruirBarra();
         }
         
     }

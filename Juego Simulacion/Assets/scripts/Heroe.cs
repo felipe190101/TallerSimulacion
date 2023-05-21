@@ -33,7 +33,23 @@ public class Heroe : MonoBehaviour
     [SerializeField] private GameObject textoFaltaLlaveVolcan;
     [SerializeField] private GameObject textoFaltaLlaveColiseo;
     [SerializeField] private GameObject textoFaltaLlaveCastillo;
+
+    [SerializeField] private GameObject textoTutorialUno;
+    [SerializeField] private GameObject textoTutorialDos;
+    [SerializeField] private GameObject textoTutorialTres;
+    [SerializeField] private GameObject textoTutorialCuatro;
+    [SerializeField] private GameObject textoTutorialCinco;
+    [SerializeField] private GameObject textoTutorialSeis;
+
+    [SerializeField] private GameObject wasdTutorial;
+    [SerializeField] private GameObject shiftTutorial;
+    [SerializeField] private GameObject clickTutorial;
+
+    [SerializeField] private GameObject Win;
+
+
     
+    private bool tutorialIniciado;
 
     private float posColX = 0.3f;
     private float posColY = 0;
@@ -104,6 +120,9 @@ public class Heroe : MonoBehaviour
 
             GameObject sli = GameObject.Find("Slime");
             slime = sli.GetComponent<Slime>();
+
+            GameObject diab = GameObject.Find("Diablo");
+            diabloJefe = diab.GetComponent<DiabloJefe>();
         }else if(string.Equals(scenaName, "Mina")){
             GameObject hong = GameObject.Find("Hongo");
             hongoJefe = hong.GetComponent<HongoJefe>();
@@ -118,6 +137,12 @@ public class Heroe : MonoBehaviour
 
     void Update()
     {
+        string scenaName = SceneManager.GetActiveScene().name;
+        if(!tutorialIniciado && string.Equals(scenaName, "MundoAbierto")){
+            StartCoroutine(iniciarTutorial());
+            tutorialIniciado = true;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("Ataca");
@@ -158,7 +183,6 @@ public class Heroe : MonoBehaviour
             ApplySprintAcceleration();
         }
 
-        string scenaName = SceneManager.GetActiveScene().name;
 
         
         if(atributos.getllaveEntrarNieve() == true) {
@@ -191,6 +215,10 @@ public class Heroe : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Locket"))
+        {
+            Win.SetActive(true);
+        }
         if (collision.gameObject.CompareTag("salida_mina"))
         {
             SceneManager.LoadScene("MundoAbierto");
@@ -310,6 +338,34 @@ public class Heroe : MonoBehaviour
         }
 
 
+    }
+
+    public IEnumerator iniciarTutorial(){
+        textoTutorialUno.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        textoTutorialUno.SetActive(false);
+         textoTutorialDos.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        textoTutorialDos.SetActive(false);
+         textoTutorialTres.SetActive(true);
+         wasdTutorial.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        textoTutorialTres.SetActive(false);
+        wasdTutorial.SetActive(false);
+         textoTutorialCuatro.SetActive(true);
+         shiftTutorial.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        shiftTutorial.SetActive(false);
+        textoTutorialCuatro.SetActive(false);
+         textoTutorialCinco.SetActive(true);
+         clickTutorial.SetActive(true);
+        yield return new WaitForSeconds(7f);
+         clickTutorial.SetActive(false);
+        textoTutorialCinco.SetActive(false);
+         textoTutorialSeis.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        textoTutorialSeis.SetActive(false);
+        
     }
 
     public IEnumerator textoLlave(){

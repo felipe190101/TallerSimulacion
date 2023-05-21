@@ -26,6 +26,12 @@ public class Heroe : MonoBehaviour
     [SerializeField] private GameObject iconoLlaveNieve;
     [SerializeField] private GameObject iconoLlaveFuego;
     [SerializeField] private GameObject textoFaltaLlaveNieve;
+    [SerializeField] private GameObject textoFaltaLlaveFuego;
+    [SerializeField] private GameObject textoFaltaLlaveMina;
+    [SerializeField] private GameObject textoFaltaLlaveVolcan;
+    [SerializeField] private GameObject textoFaltaLlaveColiseo;
+    [SerializeField] private GameObject textoFaltaLlaveCastillo;
+    
 
     private float posColX = 0.3f;
     private float posColY = 0;
@@ -151,23 +157,34 @@ public class Heroe : MonoBehaviour
         }
 
         string scenaName = SceneManager.GetActiveScene().name;
+
+        
+        if(atributos.getllaveEntrarNieve() == true) {
+            iconoLlaveNieve.SetActive(true);
+        }
+
+        if(atributos.getllaveEntrarMina() == true) {
+            iconoLlaveMina.SetActive(true);
+        }
+        
+
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("PuertaMina"))
+        /*if (collision.gameObject.CompareTag("PuertaMina"))
         {
             SceneManager.LoadScene("Mina");
-        }
+        }*/
         if (collision.gameObject.CompareTag("salida_mina"))
         {
             SceneManager.LoadScene("MundoAbierto");
         }
-        if (collision.gameObject.CompareTag("PuertaCastillo"))
+        /*if (collision.gameObject.CompareTag("PuertaCastillo"))
         {
             SceneManager.LoadScene("Castillo Nieve");
-        }
+        }*/
         if (collision.gameObject.CompareTag("salida_castillo"))
         {
             SceneManager.LoadScene("MundoAbierto");
@@ -188,43 +205,122 @@ public class Heroe : MonoBehaviour
             atributos.setVidaPersonaje(vidaPersonaje);
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("llaveMina")){
+            //textoJefeDerrotado.SetActive(false);
+            //iconoJefeDerrotado.SetActive(false);
+            Destroy(collision.gameObject);
+            StartCoroutine(textoLlave());
+            atributos.setllaveEntrarMina(true);
+        }
+        
         if (collision.gameObject.CompareTag("llaveNieve")){
             textoJefeDerrotado.SetActive(false);
             iconoJefeDerrotado.SetActive(false);
             Destroy(collision.gameObject);
             StartCoroutine(textoLlave());
+            atributos.setllaveEntrarNieve(true);
         }
 
 
-        /*if (collision.gameObject.CompareTag("llaveFuego")){
-            llaveFuego = true;
+        if (collision.gameObject.CompareTag("llaveFuego")){
             textoJefeDerrotado.SetActive(false);
             iconoJefeDerrotado.SetActive(false);
             Destroy(collision.gameObject);
-            textoLlaveConseguida.SetActive(true);
-            iconoLlaveConseguida.SetActive(true);
+            StartCoroutine(textoLlave());
+        
+            atributos.setllaveEntrarFuego(true);
+        }
 
-            llaveFuego = true;
-            PlayerPrefs.SetInt("llaveFuego", llaveFuego ? 1 : 0);
-            PlayerPrefs.Save();
-        }*/
+        if (collision.gameObject.CompareTag("llaveCastillo")){
+            textoJefeDerrotado.SetActive(false);
+            iconoJefeDerrotado.SetActive(false);
+            Destroy(collision.gameObject);
+            StartCoroutine(textoLlave());
+        
+            atributos.setllaveEntrarCastillo(true);
+        }
 
-        if (collision.gameObject.CompareTag("PuertaNieve") && llaveHielo == true)
+        if (collision.gameObject.CompareTag("PuertaNieve") && atributos.getllaveEntrarNieve() == true)
+        {
+            //iconoLlaveNieve.SetActive(false);
+            //atributos.setllaveEntrarNieve(false);
+            Destroy(collision.gameObject);
+            
+        }else if(collision.gameObject.CompareTag("PuertaNieve") && atributos.getllaveEntrarNieve() == false){
+            textoFaltaLlaveNieve.SetActive(true);
+            StartCoroutine(FaltaLlaveNieve());
+        }
+
+        if (collision.gameObject.CompareTag("PuertaFuego") && atributos.getllaveEntrarFuego() == true)
         {
             Destroy(collision.gameObject);
-        }else if(collision.gameObject.CompareTag("PuertaNieve") && llaveHielo == false){
-            textoFaltaLlaveNieve.SetActive(true);
+        }else if(collision.gameObject.CompareTag("PuertaFuego") && atributos.getllaveEntrarFuego() == false){
+            StartCoroutine(FaltaLlaveFuego());
         }
+
+        if (collision.gameObject.CompareTag("PuertaMina") && atributos.getllaveEntrarMina() == true)
+        {
+            Destroy(collision.gameObject);
+            SceneManager.LoadScene("Mina");
+        }else if(collision.gameObject.CompareTag("PuertaMina") && atributos.getllaveEntrarMina() == false){
+            StartCoroutine(FaltaLlaveMina());
+        }
+
+        if (collision.gameObject.CompareTag("PuertaCastillo") && atributos.getllaveEntrarCastillo() == true)
+        {
+            Destroy(collision.gameObject);
+            SceneManager.LoadScene("Castillo Nieve");
+        }else if(collision.gameObject.CompareTag("PuertaCastillo") && atributos.getllaveEntrarCastillo() == false){
+            StartCoroutine(FaltaLlaveCastillo());
+        }
+
+
     }
 
-    public IEnumerator textoLlave()
-        {
-            textoLlaveConseguida.SetActive(true);
-            iconoLlaveConseguida.SetActive(true);
-            yield return new WaitForSeconds(3f);
-            textoLlaveConseguida.SetActive(false);
-            iconoLlaveConseguida.SetActive(false);
-        }
+    public IEnumerator textoLlave(){
+        textoLlaveConseguida.SetActive(true);
+        iconoLlaveConseguida.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        textoLlaveConseguida.SetActive(false);
+        iconoLlaveConseguida.SetActive(false);
+    }
+
+    public IEnumerator FaltaLlaveMina(){
+        textoFaltaLlaveMina.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        textoFaltaLlaveMina.SetActive(false);
+    }
+
+    public IEnumerator FaltaLlaveNieve(){
+        textoFaltaLlaveNieve.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        textoFaltaLlaveNieve.SetActive(false);
+    }
+
+    public IEnumerator FaltaLlaveFuego(){
+        textoFaltaLlaveFuego.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        textoFaltaLlaveFuego.SetActive(false);
+    }
+
+    public IEnumerator FaltaLlaveCastillo(){
+        textoFaltaLlaveCastillo.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        textoFaltaLlaveCastillo.SetActive(false);
+    }
+
+    public IEnumerator FaltaLlaveColiseo(){
+        textoFaltaLlaveColiseo.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        textoFaltaLlaveColiseo.SetActive(false);
+    }
+
+    public IEnumerator FaltaLlaveVolcan(){
+        textoFaltaLlaveVolcan.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        textoFaltaLlaveVolcan.SetActive(false);
+    }
 
     public void CausarHeridaFantasma()
     {

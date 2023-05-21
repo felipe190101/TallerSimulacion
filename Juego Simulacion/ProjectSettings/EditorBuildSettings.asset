@@ -6,24 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: e49260c40822aa44984903be2ae127fe
+  - enabled: 1
+    path: Assets/Scenes/Historia.unity
+    guid: 131a2dcbcea85bb46b0bcc9b7aae6c75
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 0af0f316b1c07f543a261bc510aa4d48
+  - enabled: 1
     path: Assets/Scenes/MundoAbierto.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Volcan.unity
-    guid: f6bb7c92b0a3eb44c9647340408d0f77
-  - enabled: 1
-    path: Assets/Scenes/Castillo Nieve.unity
-    guid: 650284f35524e424c83226607ed02188
   - enabled: 1
     path: Assets/Scenes/Mina.unity
     guid: d5097a816c43a8742a7059e7df960c6b
   - enabled: 1
-    path: Assets/Scenes/Nivel2.unity
-    guid: e1bd9d806f3ed9942a57b1098d3b5d9f
+    path: Assets/Scenes/Castillo Nieve.unity
+    guid: 650284f35524e424c83226607ed02188
   - enabled: 1
-    path: Assets/Scenes/Nivel3.unity
-    guid: 18341f01fbf98354aa23c54efaa31291
-  - enabled: 1
-    path: Assets/Scenes/Nivel4.unity
-    guid: 44288c344f6acd940820b1f2cb60c636
+    path: Assets/Scenes/Volcan.unity
+    guid: f6bb7c92b0a3eb44c9647340408d0f77
   m_configObjects: {}

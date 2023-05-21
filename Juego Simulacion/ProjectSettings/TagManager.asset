@@ -23,6 +23,8 @@ TagManager:
   - llaveVolcan
   - PuertaNieve
   - PuertaFuego
+  - PuertaColiseo
+  - llaveColiseo
   layers:
   - Default
   - TransparentFX

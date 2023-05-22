@@ -198,11 +198,11 @@ public class DiabloJefe : MonoBehaviour
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 35;
+                    daño = 50;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 45;
+                     daño = 70;
                     break;
  
                 default:

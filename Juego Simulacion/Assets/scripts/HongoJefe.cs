@@ -201,15 +201,15 @@ private vida sistemaVida;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 18;
-                    break;
-                    
-                case var n when (n > probDebil && n <= probDebil + probMedio):
                     daño = 25;
                     break;
                     
+                case var n when (n > probDebil && n <= probDebil + probMedio):
+                    daño = 40;
+                    break;
+                    
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 30;
+                     daño = 50;
                     break;
  
                 default:

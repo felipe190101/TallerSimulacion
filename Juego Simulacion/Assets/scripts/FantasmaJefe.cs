@@ -189,15 +189,15 @@ public class FantasmaJefe : MonoBehaviour
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 20;
+                    daño = 2;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 27;
+                    daño = 5;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 32;
+                     daño = 10;
                     break;
  
                 default:

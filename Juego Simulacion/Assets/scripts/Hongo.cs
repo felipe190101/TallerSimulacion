@@ -190,20 +190,20 @@ private vida sistemaVida;
             }
         }
 
-        float probDebil = debil/100;
-        float probMedio = medio/100;
-        float probFuerte = fuerte/100;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
 
         float dato = numeros[i];
         i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 2;
+                    daño = 4;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 5;
+                    daño = 7;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):

@@ -15,6 +15,8 @@ public class Atributos : MonoBehaviour
     private bool llaveEntrarColiseo;
     private bool llaveEntrarVolcan;
 
+    private bool tutorialIniciado;
+
     private static Atributos instance;
 
     public static Atributos Instance
@@ -43,6 +45,16 @@ public class Atributos : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public bool getTutorialIniciado()
+    {
+        return tutorialIniciado;
+    }
+
+    public void setTutorialIniciado(bool tutoIniciado)
+    {
+        this.tutorialIniciado = tutoIniciado;
     }
 
     public int getVidaPersonaje()

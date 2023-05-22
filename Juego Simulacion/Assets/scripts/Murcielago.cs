@@ -132,7 +132,7 @@ public class Murcielago : MonoBehaviour
     }
 
     private void cambioDaño () {
-        //montecarlo();
+        montecarlo();
     }
 
     private void montecarlo()
@@ -163,9 +163,9 @@ public class Murcielago : MonoBehaviour
             }
         }
 
-        float probDebil = debil/100;
-        float probMedio = medio/100;
-        float probFuerte = fuerte/100;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
 
         float dato = numeros[i];
         i++;
@@ -176,11 +176,11 @@ public class Murcielago : MonoBehaviour
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 5;
+                    daño = 4;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 10;
+                     daño = 7;
                     break;
  
                 default:

@@ -134,7 +134,7 @@ public class Esqueleto : MonoBehaviour
     }
 
     private void cambioDaño () {
-        //montecarlo();
+        montecarlo();
     }
 
     private void montecarlo()
@@ -165,16 +165,16 @@ public class Esqueleto : MonoBehaviour
             }
         }
 
-        float probDebil = debil/100;
-        float probMedio = medio/100;
-        float probFuerte = fuerte/100;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
 
         float dato = numeros[i];
         i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 4;
+                    daño = 5;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
@@ -182,7 +182,7 @@ public class Esqueleto : MonoBehaviour
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 16;
+                     daño = 12;
                     break;
  
                 default:

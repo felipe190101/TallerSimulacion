@@ -185,24 +185,24 @@ public class DiabloJefe : MonoBehaviour
             }
         }
 
-        float probDebil = debil/100;
-        float probMedio = medio/100;
-        float probFuerte = fuerte/100;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
 
         float dato = numeros[i];
         i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 10;
+                    daño = 25;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 30;
+                    daño = 35;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 50;
+                     daño = 45;
                     break;
  
                 default:
@@ -226,7 +226,6 @@ public class DiabloJefe : MonoBehaviour
             sistemaVida.destruirBarra();
             textoJefeDerrotado.SetActive(true);
             iconoJefeDerrotado.SetActive(true);
-            llaveFinal.SetActive(true);
             Locket.SetActive(true);
             yield return new WaitForSeconds(3f);
             textoJefeDerrotado.SetActive(false);

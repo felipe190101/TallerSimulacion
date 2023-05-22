@@ -166,24 +166,24 @@ public class Diablillo : MonoBehaviour
             }
         }
 
-        float probDebil = debil/100;
-        float probMedio = medio/100;
-        float probFuerte = fuerte/100;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
 
         float dato = numeros[i];
         i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 30;
+                    daño = 10;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 35;
+                    daño = 15;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 50;
+                     daño = 20;
                     break;
  
                 default:

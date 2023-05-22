@@ -165,9 +165,9 @@ public class Slime : MonoBehaviour
             }
         }
 
-        float probDebil = debil/100f;
-        float probMedio = medio/100f;
-        float probFuerte = fuerte/100f;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
 
        
 
@@ -178,15 +178,15 @@ public class Slime : MonoBehaviour
             {
                 case var n when (n >= 0 && n <= probDebil):
 
-                    daño = 2;
+                    daño = 1;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 4;
+                    daño = 2;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 6;
+                     daño = 3;
                     break;
  
                 default:

@@ -50,8 +50,6 @@ public class Heroe : MonoBehaviour
 
 
     
-    private bool tutorialIniciado;
-
     private float posColX = 0.3f;
     private float posColY = 0;
 
@@ -88,9 +86,9 @@ public class Heroe : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         spritPersonaje = GetComponentInChildren<SpriteRenderer>();
         sistemaVida = GetComponent<vida>();
-        //sistemaVida.setVidaMaxima(atributos.getVidaMaximaPersonaje());
-        //sistemaVida.setVida(atributos.getVidaPersonaje());
-        //sistemaVida.iniciarVIda();
+        sistemaVida.setVidaMaxima(atributos.getVidaMaximaPersonaje());
+        sistemaVida.setVida(atributos.getVidaPersonaje());
+        sistemaVida.iniciarVIda();
 
         string scenaName = SceneManager.GetActiveScene().name;
 
@@ -139,10 +137,12 @@ public class Heroe : MonoBehaviour
     void Update()
     {
         string scenaName = SceneManager.GetActiveScene().name;
-        if(!tutorialIniciado && string.Equals(scenaName, "MundoAbierto")){
+        
+        if(!atributos.getTutorialIniciado() && string.Equals(scenaName, "MundoAbierto")){
             StartCoroutine(iniciarTutorial());
-            tutorialIniciado = true;
+            atributos.setTutorialIniciado(true);
         }
+        
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -219,6 +219,7 @@ public class Heroe : MonoBehaviour
         if(collision.gameObject.CompareTag("Locket"))
         {
             Win.SetActive(true);
+            botonVolverAlMenu.SetActive(true);
         }
         if (collision.gameObject.CompareTag("salida_mina"))
         {
@@ -235,7 +236,7 @@ public class Heroe : MonoBehaviour
         if (collision.gameObject.CompareTag("Botiquin"))
         {
             vidaPersonaje = atributos.getVidaPersonaje();
-            vidaPersonaje += 100;
+            vidaPersonaje = 1000;
             sistemaVida.setVida(vidaPersonaje);
             atributos.setVidaPersonaje(vidaPersonaje);
             Destroy(collision.gameObject);

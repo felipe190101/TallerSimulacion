@@ -53,7 +53,7 @@ public class Gusano : MonoBehaviour
         this.transform.position = new Vector3(transform.position.x,transform.position.y,0);
         float distancia = Vector3.Distance(personaje.position, transform.position);
 
-        cambioDaño();
+        daño = cambioDaño();
 
         if(distancia < 2) {
             agente.SetDestination(personaje.position);
@@ -133,11 +133,11 @@ public class Gusano : MonoBehaviour
         }
     }
 
-    private void cambioDaño () {
-        //montecarlo();
+    private int cambioDaño () {
+        return montecarlo();
     }
 
-    private void montecarlo()
+    private int montecarlo()
     {
         int debil = 0;
         int medio = 0;
@@ -165,28 +165,27 @@ public class Gusano : MonoBehaviour
             }
         }
 
-        float probDebil = debil/100;
-        float probMedio = medio/100;
-        float probFuerte = fuerte/100;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
+
 
         float dato = numeros[i];
+        
         i++;
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 1;
-                    break;
+                    return 1;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 2;
-                    break;
+                    return 2;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 3;
-                    break;
+                     return 3;
  
                 default:
-                    break;
+                   return 1;
             }
     }
 

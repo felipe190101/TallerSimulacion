@@ -134,7 +134,7 @@ public class Goblin : MonoBehaviour
     }
 
     private void cambioDaño () {
-        //montecarlo();
+        montecarlo();
     }
 
     private void montecarlo()
@@ -165,9 +165,9 @@ public class Goblin : MonoBehaviour
             }
         }
 
-        float probDebil = debil/100;
-        float probMedio = medio/100;
-        float probFuerte = fuerte/100;
+        float probDebil = debil/100.0f;
+        float probMedio = medio/100.0f;
+        float probFuerte = fuerte/100.0f;
 
         float dato = numeros[i];
         i++;

@@ -34,6 +34,8 @@ public class Heroe : MonoBehaviour
     [SerializeField] private GameObject textoFaltaLlaveVolcan;
     [SerializeField] private GameObject textoFaltaLlaveColiseo;
     [SerializeField] private GameObject textoFaltaLlaveCastillo;
+    [SerializeField] private GameObject textoReiniciar;
+    [SerializeField] private GameObject textoCargando;
 
     [SerializeField] private GameObject textoTutorialUno;
     [SerializeField] private GameObject textoTutorialDos;
@@ -143,6 +145,20 @@ public class Heroe : MonoBehaviour
             atributos.setTutorialIniciado(true);
         }
         
+        if (!string.Equals(scenaName, "MundoAbierto")){
+            if (Input.GetKey(KeyCode.Return)){
+                Time.timeScale = 1f; 
+                textoCargando.SetActive(true);
+                SceneManager.LoadScene("MundoAbierto");
+                atributos.setllaveEntrarMina(false);
+                atributos.setllaveEntrarNieve(false);
+                atributos.setllaveEntrarCastillo(false);
+                atributos.setllaveEntrarFuego(false);
+                atributos.setllaveEntrarColiseo(false);
+                atributos.setllaveEntrarVolcan(false);
+                atributos.setVidaPersonaje(1000);
+            }
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -186,15 +202,15 @@ public class Heroe : MonoBehaviour
 
 
         
-        /*if(atributos.getllaveEntrarNieve() == true) {
+        if(atributos.getllaveEntrarNieve() == true) {
             iconoLlaveNieve.SetActive(true);
-        }*/
+        }
 
-        /*if(atributos.getllaveEntrarMina() == true) {
+        if(atributos.getllaveEntrarMina() == true) {
             iconoLlaveMina.SetActive(true);
-        }*/
+        }
 
-        /*if(atributos.getllaveEntrarCastillo() == true) {
+        if(atributos.getllaveEntrarCastillo() == true) {
             iconoLlaveCastillo.SetActive(true);
         }
 
@@ -208,7 +224,7 @@ public class Heroe : MonoBehaviour
 
         if(atributos.getllaveEntrarVolcan() == true) {
             iconoLlaveVolcan.SetActive(true);
-        }*/
+        }
         
 
     }
@@ -611,6 +627,7 @@ public class Heroe : MonoBehaviour
                 iconMuerte.SetActive(true);
                 botonReinicio.SetActive(true);
                 botonVolverAlMenu.SetActive(true);
+                textoReiniciar.SetActive(true);
                 Time.timeScale = 0f;
             }
         }
@@ -631,6 +648,7 @@ public class Heroe : MonoBehaviour
                 iconMuerte.SetActive(true);
                 botonReinicio.SetActive(true);
                 botonVolverAlMenu.SetActive(true);
+                textoReiniciar.SetActive(true);
                 Time.timeScale = 0f;
 
             }
@@ -652,6 +670,7 @@ public class Heroe : MonoBehaviour
                 iconMuerte.SetActive(true);
                 botonReinicio.SetActive(true);
                 botonVolverAlMenu.SetActive(true);
+                textoReiniciar.SetActive(true);
                 Time.timeScale = 0f;
             }
         }
@@ -682,6 +701,7 @@ public class Heroe : MonoBehaviour
 
     public void ReiniciarJuego(){
         Time.timeScale = 1f;
+        textoCargando.SetActive(true);
         SceneManager.LoadScene("MundoAbierto");
         atributos.setllaveEntrarMina(false);
         atributos.setllaveEntrarNieve(false);
@@ -689,11 +709,11 @@ public class Heroe : MonoBehaviour
         atributos.setllaveEntrarFuego(false);
         atributos.setllaveEntrarColiseo(false);
         atributos.setllaveEntrarVolcan(false);
-        atributos.setVidaPersonaje(100);
+        atributos.setVidaPersonaje(1000);
+    
     }
 
     public void PausarJuego(){
-        Debug.Log("hola niños");
         panelMenuPausa.SetActive(true);
         Time.timeScale = 0f;  
     }

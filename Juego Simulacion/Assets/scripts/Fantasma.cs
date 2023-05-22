@@ -66,7 +66,7 @@ public class Fantasma : MonoBehaviour
 
         
         cambioDaño();
-        if(distancia < 2) {
+        if(distancia < 4) {
             agente.SetDestination(personaje.position);
             if(this.transform.position.x > personaje.position.x) {
                 spritPersonaje.flipX = false;

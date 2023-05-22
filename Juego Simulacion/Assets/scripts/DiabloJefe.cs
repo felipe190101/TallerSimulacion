@@ -73,7 +73,7 @@ public class DiabloJefe : MonoBehaviour
 
         cambioDaño();
 
-        if(distancia < 4) {
+        if(distancia < 3) {
             agente.SetDestination(personaje.position);
             if(this.transform.position.x > personaje.position.x) {
                 transform.localScale = new Vector2(-escalaX,escalaY);

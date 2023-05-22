@@ -174,15 +174,15 @@ public class Esqueleto : MonoBehaviour
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 5;
+                    daño = 10;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 8;
+                    daño = 16;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 12;
+                     daño = 24;
                     break;
  
                 default:

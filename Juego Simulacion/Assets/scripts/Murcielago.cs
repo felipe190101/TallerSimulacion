@@ -172,15 +172,15 @@ public class Murcielago : MonoBehaviour
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 2;
-                    break;
-                    
-                case var n when (n > probDebil && n <= probDebil + probMedio):
                     daño = 4;
                     break;
                     
+                case var n when (n > probDebil && n <= probDebil + probMedio):
+                    daño = 8;
+                    break;
+                    
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 7;
+                     daño = 14;
                     break;
  
                 default:

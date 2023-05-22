@@ -175,15 +175,15 @@ public class Diablillo : MonoBehaviour
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    daño = 10;
+                    daño = 20;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 15;
+                    daño = 30;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 20;
+                     daño = 40;
                     break;
  
                 default:

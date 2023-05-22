@@ -176,13 +176,13 @@ public class Gusano : MonoBehaviour
         switch (dato)
             {
                 case var n when (n >= 0 && n <= probDebil):
-                    return 1;
+                    return 3;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    return 2;
+                    return 6;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     return 3;
+                     return 9;
  
                 default:
                    return 1;

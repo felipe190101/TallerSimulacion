@@ -178,15 +178,15 @@ public class Slime : MonoBehaviour
             {
                 case var n when (n >= 0 && n <= probDebil):
 
-                    daño = 1;
+                    daño = 3;
                     break;
                     
                 case var n when (n > probDebil && n <= probDebil + probMedio):
-                    daño = 2;
+                    daño = 6;
                     break;
                     
                 case var n when (probDebil + probMedio > 0.9f && n <= 1f):
-                     daño = 3;
+                     daño = 9;
                     break;
  
                 default:

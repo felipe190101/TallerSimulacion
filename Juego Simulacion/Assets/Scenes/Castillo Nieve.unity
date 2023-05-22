@@ -40896,6 +40896,8 @@ MonoBehaviour:
   textGameOver: {fileID: 971547354}
   iconMuerte: {fileID: 512338112}
   botonReinicio: {fileID: 2129610946}
+  botonVolverAlMenu: {fileID: 0}
+  panelMenuPausa: {fileID: 0}
   textoJefeDerrotado: {fileID: 797145683}
   iconoJefeDerrotado: {fileID: 2015753353}
   textoLlaveConseguida: {fileID: 1562964828}
@@ -40912,6 +40914,16 @@ MonoBehaviour:
   textoFaltaLlaveVolcan: {fileID: 956010067}
   textoFaltaLlaveColiseo: {fileID: 1576626112}
   textoFaltaLlaveCastillo: {fileID: 277961743}
+  textoTutorialUno: {fileID: 0}
+  textoTutorialDos: {fileID: 0}
+  textoTutorialTres: {fileID: 0}
+  textoTutorialCuatro: {fileID: 0}
+  textoTutorialCinco: {fileID: 0}
+  textoTutorialSeis: {fileID: 0}
+  wasdTutorial: {fileID: 0}
+  shiftTutorial: {fileID: 0}
+  clickTutorial: {fileID: 0}
+  Win: {fileID: 0}
   speed: 5
   llaveHielo: 0
 --- !u!4 &2045033413

@@ -17,6 +17,7 @@ public class Heroe : MonoBehaviour
     [SerializeField] private GameObject iconMuerte;    
     [SerializeField] private GameObject botonReinicio;
     [SerializeField] private GameObject botonVolverAlMenu;
+    [SerializeField] private GameObject panelMenuPausa;
     [SerializeField] private GameObject textoJefeDerrotado;
     [SerializeField] private GameObject iconoJefeDerrotado;
     [SerializeField] private GameObject textoLlaveConseguida;
@@ -87,9 +88,9 @@ public class Heroe : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         spritPersonaje = GetComponentInChildren<SpriteRenderer>();
         sistemaVida = GetComponent<vida>();
-        sistemaVida.setVidaMaxima(atributos.getVidaMaximaPersonaje());
-        sistemaVida.setVida(atributos.getVidaPersonaje());
-        sistemaVida.iniciarVIda();
+        //sistemaVida.setVidaMaxima(atributos.getVidaMaximaPersonaje());
+        //sistemaVida.setVida(atributos.getVidaPersonaje());
+        //sistemaVida.iniciarVIda();
 
         string scenaName = SceneManager.GetActiveScene().name;
 
@@ -185,15 +186,15 @@ public class Heroe : MonoBehaviour
 
 
         
-        if(atributos.getllaveEntrarNieve() == true) {
+        /*if(atributos.getllaveEntrarNieve() == true) {
             iconoLlaveNieve.SetActive(true);
-        }
+        }*/
 
-        if(atributos.getllaveEntrarMina() == true) {
+        /*if(atributos.getllaveEntrarMina() == true) {
             iconoLlaveMina.SetActive(true);
-        }
+        }*/
 
-        if(atributos.getllaveEntrarCastillo() == true) {
+        /*if(atributos.getllaveEntrarCastillo() == true) {
             iconoLlaveCastillo.SetActive(true);
         }
 
@@ -207,7 +208,7 @@ public class Heroe : MonoBehaviour
 
         if(atributos.getllaveEntrarVolcan() == true) {
             iconoLlaveVolcan.SetActive(true);
-        }
+        }*/
         
 
     }
@@ -681,6 +682,28 @@ public class Heroe : MonoBehaviour
     public void ReiniciarJuego(){
         Time.timeScale = 1f;
         SceneManager.LoadScene("MundoAbierto");
+        atributos.setllaveEntrarMina(false);
+        atributos.setllaveEntrarNieve(false);
+        atributos.setllaveEntrarCastillo(false);
+        atributos.setllaveEntrarFuego(false);
+        atributos.setllaveEntrarColiseo(false);
+        atributos.setllaveEntrarVolcan(false);
         atributos.setVidaPersonaje(100);
+    }
+
+    public void PausarJuego(){
+        Debug.Log("hola niños");
+        panelMenuPausa.SetActive(true);
+        Time.timeScale = 0f;  
+    }
+
+    public void ContinuarJuego(){
+        Time.timeScale = 1f;  
+        panelMenuPausa.SetActive(false);
+    }
+
+    public void MenuPrincipal(){
+        Time.timeScale = 1f;  
+        SceneManager.LoadScene("Menu");
     }
 }

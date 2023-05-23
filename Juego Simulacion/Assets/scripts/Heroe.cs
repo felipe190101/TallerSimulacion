@@ -723,8 +723,8 @@ public class Heroe : MonoBehaviour
 
     private void ApplySprintAcceleration()
     {
-        sprintSpeed += 2 * Time.deltaTime;
-        sprintSpeed = Mathf.Clamp(sprintSpeed, 0.0f, 10);
+        sprintSpeed += 1 * Time.deltaTime;
+        sprintSpeed = Mathf.Clamp(sprintSpeed, 0.0f, 8);
 
         float movimientoHorizontal = Input.GetAxis("Horizontal");
         float movimientoVertical = Input.GetAxis("Vertical");
